@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilson's Birthday Celebration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at top, rgba(255, 154, 86, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(255, 179, 71, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 30px;
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            color: white;
+            padding: 80px 60px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid #ff9a56;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(255, 154, 86, 0.1) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .ornament {
+            font-size: 3em;
+            opacity: 0.3;
+            position: absolute;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .ornament:nth-child(1) { top: 20px; left: 30px; animation-delay: 0s; }
+        .ornament:nth-child(2) { top: 40px; right: 40px; animation-delay: 1s; }
+        .ornament:nth-child(3) { bottom: 30px; left: 50px; animation-delay: 2s; }
+        .ornament:nth-child(4) { bottom: 40px; right: 30px; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: 8px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #ff9a56 0%, #ffd200 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 154, 86, 0.3);
+        }
+
+        .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6em;
+            opacity: 0.9;
+            font-style: italic;
+            letter-spacing: 3px;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+            color: #ffd200;
+        }
+
+        .divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff9a56, transparent);
+            margin: 30px auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Countdown Timer */
+        .countdown-section {
+            background: linear-gradient(135deg, #fff8f0 0%, #ffffff 100%);
+            padding: 50px 40px;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .countdown-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            color: #2d2d2d;
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: white;
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            min-width: 120px;
+            border: 2px solid #ff9a56;
+            transition: transform 0.3s ease;
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .countdown-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #ff9a56;
+            line-height: 1;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .countdown-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 70px 60px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: #2d2d2d;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff9a56, #ffd200);
+        }
+
+        .agenda-item {
+            margin-bottom: 40px;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #f0f0f0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .agenda-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, #ff9a56 0%, #ffd200 100%);
+            transition: width 0.4s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .agenda-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(255, 154, 86, 0.15);
+            border-color: #ff9a56;
+        }
+
+        .agenda-item:hover::before {
+            width: 100%;
+            opacity: 0.05;
+        }
+
+        .time {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1em;
+            color: #ff9a56;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 154, 86, 0.1);
+            border-radius: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .activity-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .icon {
+            font-size: 2.5em;
+            position: absolute;
+            right: 40px;
+            top: 40px;
+            opacity: 0.4;
+            transition: all 0.3s ease;
+        }
+
+        .agenda-item:hover .icon {
+            opacity: 0.7;
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .venue {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.8;
+            font-weight: 400;
+            z-index: 1;
+        }
+
+        .venue::before {
+            content: '📍';
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+
+        .link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #ff9a56 0%, #ffb347 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            margin-right: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(255, 154, 86, 0.3);
+            position: relative;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        .link:hover {
+            background: linear-gradient(135deg, #ff8533 0%, #ff9a56 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 154, 86, 0.4);
+        }
+
+        .notes {
+            margin-top: 25px;
+            padding: 20px 25px;
+            background: linear-gradient(135deg, #fff8f0 0%, #fffaf5 100%);
+            border-radius: 12px;
+            color: #666;
+            font-style: italic;
+            border-left: 3px solid #ffd200;
+            font-size: 0.95em;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            padding: 50px 40px;
+            text-align: center;
+            color: #ccc;
+            border-top: 3px solid #ff9a56;
+        }
+
+        .footer-message {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            background: linear-gradient(135deg, #ff9a56 0%, #ffd200 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .footer-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2em;
+            font-style: italic;
+            color: #999;
+            letter-spacing: 1px;
+        }
+
+        /* Floating Gift Icon */
+        .floating-gift {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff9a56 0%, #ffd200 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 154, 86, 0.5);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .floating-gift:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 12px 35px rgba(255, 154, 86, 0.7);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 25px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.8em;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            color: #ff9a56;
+            background: rgba(255, 154, 86, 0.1);
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            color: #2d2d2d;
+            margin-bottom: 5px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .modal-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95em;
+            color: #666;
+            text-align: center;
+            margin-bottom: 20px;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .hint-section {
+            background: linear-gradient(135deg, #fff8f0 0%, #fffaf5 100%);
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            border-left: 3px solid #ff9a56;
+            text-align: center;
+        }
+
+        .hint-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95em;
+            color: #ff9a56;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .hint-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        .hint-list li {
+            padding: 7px 0;
+            color: #555;
+            font-size: 0.9em;
+            line-height: 1.5;
+            position: relative;
+            padding-left: 0;
+            text-align: center;
+        }
+
+        .hint-list li::before {
+            content: '';
+            position: static;
+            font-size: 0.9em;
+        }
+
+        .guess-input {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 0.95em;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .guess-input:focus {
+            outline: none;
+            border-color: #ff9a56;
+        }
+
+        .guess-button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #ff9a56 0%, #ffb347 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.5px;
+            box-sizing: border-box;
+        }
+
+        .guess-button:hover {
+            background: linear-gradient(135deg, #ff8533 0%, #ff9a56 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 154, 86, 0.4);
+        }
+
+        .result-message {
+            margin-top: 12px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .result-message.success {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+
+        .result-message.saved {
+            background: #d1ecf1;
+            color: #0c5460;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+                letter-spacing: 3px;
+            }
+
+            .subtitle {
+                font-size: 1em;
+                letter-spacing: 2px;
+            }
+
+            .header {
+                padding: 40px 20px 30px;
+            }
+
+            .ornament {
+                font-size: 2em;
+            }
+
+            .countdown-section {
+                padding: 30px 20px;
+            }
+
+            .countdown-title {
+                font-size: 1.3em;
+                margin-bottom: 20px;
+            }
+
+            .countdown-timer {
+                gap: 10px;
+            }
+
+            .countdown-item {
+                padding: 15px 20px;
+                min-width: 70px;
+            }
+
+            .countdown-number {
+                font-size: 2em;
+            }
+
+            .countdown-label {
+                font-size: 0.7em;
+                letter-spacing: 1px;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+                margin-bottom: 30px;
+            }
+
+            .section-title::after {
+                width: 60px;
+                height: 2px;
+            }
+
+            .agenda-item {
+                padding: 20px;
+                margin-bottom: 25px;
+            }
+
+            .activity-title {
+                font-size: 1.4em;
+                margin-bottom: 15px;
+            }
+
+            .time {
+                font-size: 0.75em;
+                padding: 6px 12px;
+                margin-bottom: 12px;
+            }
+
+            .venue {
+                font-size: 0.95em;
+                padding-left: 25px;
+                margin-bottom: 12px;
+            }
+
+            .venue::before {
+                font-size: 1em;
+            }
+
+            .icon {
+                font-size: 1.8em;
+                right: 20px;
+                top: 20px;
+            }
+
+            .link {
+                padding: 10px 20px;
+                font-size: 0.85em;
+                margin-top: 12px;
+                margin-right: 8px;
+                margin-bottom: 8px;
+                display: inline-block;
+                width: auto;
+            }
+
+            .notes {
+                margin-top: 15px;
+                padding: 15px;
+                font-size: 0.85em;
+                line-height: 1.6;
+            }
+
+            .footer {
+                padding: 30px 20px;
+            }
+
+            .footer-message {
+                font-size: 1.4em;
+                margin-bottom: 10px;
+            }
+
+            .footer-subtitle {
+                font-size: 1em;
+            }
+
+            .floating-gift {
+                width: 60px;
+                height: 60px;
+                font-size: 2em;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .modal-content {
+                padding: 22px 18px;
+                width: 92%;
+            }
+
+            .modal-title {
+                font-size: 1.5em;
+                margin-bottom: 4px;
+            }
+
+            .modal-subtitle {
+                font-size: 0.88em;
+                margin-bottom: 16px;
+            }
+
+            .hint-section {
+                padding: 14px;
+                margin-bottom: 14px;
+            }
+
+            .hint-title {
+                font-size: 0.88em;
+                margin-bottom: 8px;
+            }
+
+            .hint-list li {
+                font-size: 0.88em;
+                padding: 6px 0;
+                padding-left: 0;
+            }
+
+            .hint-list li::before {
+                font-size: 0.85em;
+            }
+
+            .guess-input {
+                padding: 10px 14px;
+                font-size: 0.9em;
+                margin-bottom: 8px;
+            }
+
+            .guess-button {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+
+            .result-message {
+                font-size: 0.85em;
+                padding: 9px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+                letter-spacing: 2px;
+            }
+
+            .subtitle {
+                font-size: 0.9em;
+            }
+
+            .header {
+                padding: 30px 15px 25px;
+            }
+
+            .countdown-title {
+                font-size: 1.1em;
+            }
+
+            .countdown-item {
+                padding: 12px 15px;
+                min-width: 65px;
+            }
+
+            .countdown-number {
+                font-size: 1.8em;
+            }
+
+            .countdown-label {
+                font-size: 0.65em;
+            }
+
+            .section-title {
+                font-size: 1.3em;
+            }
+
+            .activity-title {
+                font-size: 1.2em;
+            }
+
+            .time {
+                font-size: 0.7em;
+            }
+
+            .venue {
+                font-size: 0.9em;
+            }
+
+            .link {
+                padding: 8px 16px;
+                font-size: 0.8em;
+            }
+
+            .icon {
+                font-size: 1.5em;
+            }
+
+            .floating-gift {
+                width: 55px;
+                height: 55px;
+                font-size: 1.8em;
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .modal-content {
+                padding: 18px 15px;
+            }
+
+            .modal-title {
+                font-size: 1.35em;
+            }
+
+            .modal-subtitle {
+                font-size: 0.82em;
+                margin-bottom: 14px;
+            }
+
+            .modal-close {
+                top: 10px;
+                right: 10px;
+                font-size: 1.3em;
+                width: 32px;
+                height: 32px;
+            }
+
+            .hint-section {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+
+            .hint-title {
+                font-size: 0.82em;
+                margin-bottom: 7px;
+            }
+
+            .hint-list li {
+                font-size: 0.82em;
+                padding: 5px 0;
+                padding-left: 0;
+            }
+
+            .hint-list li::before {
+                font-size: 0.8em;
+            }
+
+            .guess-input {
+                padding: 9px 12px;
+                font-size: 0.85em;
+            }
+
+            .guess-button {
+                padding: 9px;
+                font-size: 0.85em;
+            }
+
+            .result-message {
+                font-size: 0.8em;
+                padding: 8px 9px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="ornament">✨</div>
+            <div class="ornament">🎊</div>
+            <div class="ornament">🎉</div>
+            <div class="ornament">🎈</div>
+            <h1>WILSON</h1>
+            <div class="divider"></div>
+            <div class="subtitle">Birthday Celebration</div>
+        </div>
+
+        <div class="countdown-section">
+            <div class="countdown-title">Celebration Begins In</div>
+            <div class="countdown-timer">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section-title">Today's Itinerary</div>
+
+            <div class="agenda-item">
+                <span class="icon">💍</span>
+                <div class="time">12:00 PM - 1:30 PM</div>
+                <div class="activity-title">Ring Workshop</div>
+                <div class="venue">Reds Thread Studio, Anjung Hijau Apartment Bukit Jalil</div>
+                <a href="https://waze.com/ul/hw2833sjw5" class="link" target="_blank" rel="noopener noreferrer">Navigate with Waze</a>
+                <div class="notes">Park outside the apartment and we'll go in together</div>
+            </div>
+
+            <div class="agenda-item">
+                <span class="icon">🍽️</span>
+                <div class="time">1:30 PM - 3:00 PM</div>
+                <div class="activity-title">Lunch Time</div>
+                <div class="venue">SMORES Bukit Jalil</div>
+                <a href="https://waze.com/ul/hw2833tqmu" class="link" target="_blank" rel="noopener noreferrer">Navigate with Waze</a>
+                <a href="https://smores.com.my/branch/smores-bukit-jalil/" class="link" target="_blank" rel="noopener noreferrer">View Menu</a>
+                <div class="notes">Check out the menu beforehand!</div>
+            </div>
+
+            <div class="agenda-item">
+                <span class="icon">🚶</span>
+                <div class="time">3:00 PM - 5:00 PM</div>
+                <div class="activity-title">Jalan Jalan</div>
+                <div class="venue">Pavilion Bukit Jalil</div>
+                <a href="https://waze.com/ul/hw2833e6dy" class="link" target="_blank" rel="noopener noreferrer">Navigate with Waze</a>
+                <div class="notes">Walk around, window shopping, maybe grab some snacks</div>
+            </div>
+
+            <div class="agenda-item">
+                <span class="icon">🎪</span>
+                <div class="time">5:00 PM - 7:00 PM</div>
+                <div class="activity-title">Circus Time - Great British Circus</div>
+                <div class="venue">National Stadium Bukit Jalil, Car Park A, Jalan Barat, Bukit Jalil</div>
+                <a href="https://waze.com/ul/hw28365buc" class="link" target="_blank" rel="noopener noreferrer">Navigate with Waze</a>
+                <a href="https://drive.google.com/file/d/1Y1Gu83CUIBCcJs3xVNK6XuIe_1nAN_eD/view?usp=share_link" class="link" target="_blank" rel="noopener noreferrer">View Tickets 🎟️</a>
+                <div class="notes">Remember to bring your tickets! Enjoy the show! 🎪✨</div>
+            </div>
+
+            <div class="agenda-item">
+                <span class="icon">🍴</span>
+                <div class="time">7:00 PM - 8:30 PM</div>
+                <div class="activity-title">Dinner (TBD)</div>
+                <div class="venue">To be decided</div>
+                <div class="notes">Wilson's turn to decide! 😄</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-message">Happy Birthday, Wilson! 🎉</div>
+            <div class="footer-subtitle">Wishing you an unforgettable day filled with joy and wonderful memories</div>
+        </div>
+    </div>
+
+    <!-- Floating Gift Icon -->
+    <div class="floating-gift" onclick="openGiftModal()">
+        🎁
+    </div>
+
+    <!-- Gift Guessing Modal -->
+    <div class="modal-overlay" id="giftModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeGiftModal()">✕</button>
+            <div class="modal-title">🎁 Mystery Gift 🎁</div>
+            <div class="modal-subtitle">Can you guess what your surprise gift is?</div>
+            
+            <div class="hint-section">
+                <div class="hint-title">💡 Hints:</div>
+                <ul class="hint-list" id="hintList">
+                    <!-- Hints will be added dynamically by JavaScript -->
+                </ul>
+                <div id="lockMessage" style="display: none; color: #ff9a56; font-weight: 600; text-align: center; margin-top: 15px; font-size: 0.95em;"></div>
+            </div>
+
+            <input 
+                type="text" 
+                class="guess-input" 
+                id="guessInput" 
+                placeholder="Type your guess here..."
+                onkeypress="handleKeyPress(event)"
+            >
+            
+            <button class="guess-button" onclick="checkGuess()">Submit Guess</button>
+            
+            <div class="result-message" id="resultMessage"></div>
+        </div>
+    </div>
+
+    <script>
+        // Set the event date and time - January 4, 2026 at 12:00 PM Malaysia Time (UTC+8)
+        // This creates the date in UTC and adds 8 hours offset for Malaysia
+        const eventDate = new Date('2026-01-04T12:00:00+08:00');
+
+        function updateCountdown() {
+            // Get current time
+            const now = new Date();
+            
+            // Calculate difference in milliseconds
+            const difference = eventDate.getTime() - now.getTime();
+
+            if (difference > 0) {
+                // Calculate time units
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                // Update the display
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            } else {
+                // Event has started or passed
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                
+                document.querySelector('.countdown-title').textContent = "Let's Celebrate! 🎉";
+            }
+        }
+
+        // Update countdown immediately and then every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Gift Modal Functions
+        const hints = [
+            "Three layers tell a complete story",
+            "It's with you all day but weighs nothing",
+            "A single drop changes everything"
+        ];
+
+        function openGiftModal() {
+            document.getElementById('giftModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            updateHints();
+        }
+
+        function closeGiftModal() {
+            document.getElementById('giftModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateHints() {
+            const now = new Date();
+            const hintList = document.getElementById('hintList');
+            const lockMessage = document.getElementById('lockMessage');
+            
+            // Check if game has started (first time opening)
+            let gameData = localStorage.getItem('wilsonGiftGame');
+            if (!gameData) {
+                // First time opening - start the game
+                gameData = {
+                    startTime: now.toISOString(),
+                    guesses: [],
+                    answeredHints: [] // Track which hints have been answered
+                };
+                localStorage.setItem('wilsonGiftGame', JSON.stringify(gameData));
+            } else {
+                gameData = JSON.parse(gameData);
+                // Add answeredHints if it doesn't exist (for backward compatibility)
+                if (!gameData.answeredHints) {
+                    gameData.answeredHints = [];
+                }
+            }
+            
+            const startTime = new Date(gameData.startTime);
+            const hoursSinceStart = (now - startTime) / (1000 * 60 * 60);
+            
+            // Clear hints
+            hintList.innerHTML = '';
+            lockMessage.style.display = 'none';
+            
+            // Determine current hint stage
+            let currentHintStage = 0;
+            let nextUnlockTime = null;
+            
+            // Check if event has started (after countdown ends)
+            if (now >= eventDate) {
+                // Show all hints after event starts
+                currentHintStage = 3;
+            } else {
+                // Progressive unlock based on time
+                if (hoursSinceStart >= 24) {
+                    currentHintStage = 3;
+                } else if (hoursSinceStart >= 12) {
+                    currentHintStage = 2;
+                    nextUnlockTime = new Date(startTime.getTime() + (24 * 60 * 60 * 1000));
+                } else {
+                    currentHintStage = 1;
+                    nextUnlockTime = new Date(startTime.getTime() + (12 * 60 * 60 * 1000));
+                }
+            }
+            
+            // Check if current hint has been answered
+            const hasAnsweredCurrentHint = gameData.answeredHints.includes(currentHintStage);
+            
+            // Update hint title
+            const hintTitle = document.querySelector('.hint-title');
+            hintTitle.innerHTML = `💡 Hint ${currentHintStage}:`;
+            
+            if (hasAnsweredCurrentHint) {
+                // User already answered this hint, show only unlock message
+                if (nextUnlockTime && now < eventDate) {
+                    const options = { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric', 
+                        hour: '2-digit', 
+                        minute: '2-digit',
+                        hour12: true,
+                        timeZone: 'Asia/Kuala_Lumpur'
+                    };
+                    const formattedTime = nextUnlockTime.toLocaleString('en-US', options);
+                    const hoursLeft = Math.ceil((nextUnlockTime - now) / (1000 * 60 * 60));
+                    
+                    lockMessage.innerHTML = `✅ Answer saved!<br><br>⏰ Come back in ${hoursLeft} hours!<br>Next hint available at:<br>${formattedTime}`;
+                    lockMessage.style.display = 'block';
+                } else if (now >= eventDate || hoursSinceStart >= 24) {
+                    // All hints unlocked
+                    lockMessage.innerHTML = `✅ All hints are now available!<br>Check back to see all clues.`;
+                    lockMessage.style.display = 'block';
+                }
+            } else {
+                // Show only the current hint
+                const hintIndex = currentHintStage - 1;
+                if (hintIndex < hints.length) {
+                    const li = document.createElement('li');
+                    li.textContent = `Hint ${currentHintStage}: ${hints[hintIndex]}`;
+                    hintList.appendChild(li);
+                }
+                
+                // Show how many more hints are coming (if not all unlocked yet)
+                if (currentHintStage < 3 && now < eventDate) {
+                    const hintsRemaining = 3 - currentHintStage;
+                    lockMessage.innerHTML = `${hintsRemaining} more hint${hintsRemaining > 1 ? 's' : ''} coming soon!`;
+                    lockMessage.style.display = 'block';
+                    lockMessage.style.color = '#999';
+                    lockMessage.style.fontSize = '0.85em';
+                    lockMessage.style.marginTop = '10px';
+                }
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                checkGuess();
+            }
+        }
+
+        function checkGuess() {
+            const input = document.getElementById('guessInput');
+            const guess = input.value.trim().toLowerCase();
+            const resultMessage = document.getElementById('resultMessage');
+            
+            if (guess === '') {
+                resultMessage.textContent = 'Please type your guess!';
+                resultMessage.className = 'result-message';
+                resultMessage.style.display = 'block';
+                resultMessage.style.background = '#fff3cd';
+                resultMessage.style.color = '#856404';
+                return;
+            }
+            
+            // Get game data
+            let gameData = JSON.parse(localStorage.getItem('wilsonGiftGame'));
+            if (!gameData) {
+                gameData = { startTime: new Date().toISOString(), guesses: [], answeredHints: [] };
+            }
+            if (!gameData.answeredHints) {
+                gameData.answeredHints = [];
+            }
+            
+            // Determine current hint stage
+            const now = new Date();
+            const startTime = new Date(gameData.startTime);
+            const hoursSinceStart = (now - startTime) / (1000 * 60 * 60);
+            
+            let currentHintStage = 0;
+            if (now >= eventDate) {
+                currentHintStage = 3;
+            } else if (hoursSinceStart >= 24) {
+                currentHintStage = 3;
+            } else if (hoursSinceStart >= 12) {
+                currentHintStage = 2;
+            } else {
+                currentHintStage = 1;
+            }
+            
+            // Save the guess
+            const guessData = {
+                guess: input.value,
+                timestamp: new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' }),
+                hintStage: currentHintStage
+            };
+            gameData.guesses.push(guessData);
+            
+            // Mark this hint as answered
+            if (!gameData.answeredHints.includes(currentHintStage)) {
+                gameData.answeredHints.push(currentHintStage);
+            }
+            
+            localStorage.setItem('wilsonGiftGame', JSON.stringify(gameData));
+            
+            // Send to Google Sheets (secretly track the guess)
+            sendToGoogleSheets(input.value, guessData.timestamp, currentHintStage);
+            
+            // Show success message (without revealing if correct or not)
+            resultMessage.textContent = '✅ Your guess has been saved! Keep thinking... 🤔';
+            resultMessage.className = 'result-message saved';
+            
+            // Clear input
+            input.value = '';
+            
+            // Update hints immediately to hide current hint and show timer
+            setTimeout(() => {
+                updateHints();
+                resultMessage.style.display = 'none';
+            }, 2000);
+        }
+
+        // Function to send data to Google Sheets
+        function sendToGoogleSheets(guess, timestamp, hintStage) {
+            // Replace this URL with your Google Apps Script Web App URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzOmdhfBgPkyQ1xSxptTfTJohEhgkftfZ8mUtrAzPSDbMsKtBTCTcaRF-b5j8zBb8Ob/exec';
+            
+            const formData = new FormData();
+            formData.append('guess', guess);
+            formData.append('timestamp', timestamp);
+            formData.append('hintNumber', hintStage);
+            
+            // Send data silently (don't wait for response, don't show errors)
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: formData,
+                mode: 'no-cors'
+            }).catch(() => {
+                // Fail silently - Wilson won't know if it fails
+            });
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('giftModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeGiftModal();
+            }
+        });
+
+        // Update hints every minute in case time has passed
+        setInterval(updateHints, 60000);
+    </script>
+</body>
+</html>
